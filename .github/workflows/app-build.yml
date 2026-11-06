@@ -27,6 +27,7 @@ jobs:
       - name: Clean and Get Dependencies
         run: |
           flutter clean
+          flutter create . --platforms=android
           flutter pub get
 
       - name: Build Android App Bundle (.aab)
@@ -34,4 +35,3 @@ jobs:
 
       - name: Build Android APK (.apk)
         run: flutter build apk --release
-# Force fresh cache build - No v1 embedding
