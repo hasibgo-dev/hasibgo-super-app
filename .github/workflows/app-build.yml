@@ -22,11 +22,11 @@ jobs:
           flutter-version: '3.x'
           channel: 'stable'
 
-      - name: Clean Project
-        run: flutter clean
-
-      - name: Install dependencies
-        run: flutter pub get
+      # ক্যাশ ও প্রজেক্ট সম্পূর্ণ পরিষ্কার করার জন্য
+      - name: Clean Flutter Project
+        run: |
+          flutter clean
+          flutter pub get
 
       - name: Build Android App Bundle (.aab)
         run: flutter build appbundle --release
