@@ -1,6 +1,6 @@
 workflows:
   default-workflow:
-    name: Default Workflow
+    name: default workflow
     environment:
       flutter: stable
       xcode: latest
@@ -8,16 +8,16 @@ workflows:
       cache_paths:
         - ~/.pub-cache
     scripts:
-      - name: Clean project
+      - name: clean project
         script: |
           flutter clean
           flutter pub get
-      - name: Build Android App Bundle
+      - name: build android app bundle
         script: |
           flutter build appbundle --release
-      - name: Build iOS IPA
+      - name: build ios ipa
         script: |
-          flutter build ipa --release --export-options-plist=ExportOptions.plist
-artifacts:
-  - build/app/outputs/bundle/release/*.aab
-  - build/ios/ipa/*.ipa
+          flutter build ipa --release --export-options-plist=exportoptions.plist
+    artifacts:
+      - build/app/outputs/bundle/release/*.aab
+      - build/ios/ipa/*.ipa
