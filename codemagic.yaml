@@ -4,9 +4,9 @@ workflows:
     environment:
       flutter: stable
       xcode: latest
-      cache:
-        cache_paths:
-          - ~/.pub-cache
+    cache:
+      cache_paths:
+        - ~/.pub-cache
     scripts:
       - name: Clean project
         script: |
