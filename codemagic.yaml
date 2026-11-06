@@ -1,6 +1,6 @@
 workflows:
   default-workflow:
-    name: Default workflow
+    name: Default Workflow
     environment:
       flutter: stable
       xcode: latest
