@@ -34,3 +34,4 @@ jobs:
 
       - name: Build Android APK (.apk)
         run: flutter build apk --release
+# Force fresh cache build - No v1 embedding
