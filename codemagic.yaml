@@ -4,20 +4,20 @@ workflows:
     environment:
       flutter: stable
       xcode: latest
+      cache:
+        cache_paths:
+          - ~/.pub-cache
     scripts:
       - name: Clean project
         script: |
           flutter clean
           flutter pub get
-      
       - name: Build Android App Bundle
         script: |
           flutter build appbundle --release
-          
       - name: Build iOS IPA
         script: |
-          flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
-          
-    artifacts:
-      - build/app/outputs/bundle/release/*.aab
-      - build/ios/ipa/*.ipa
+          flutter build ipa --release --export-options-plist=ExportOptions.plist
+artifacts:
+  - build/app/outputs/bundle/release/*.aab
+  - build/ios/ipa/*.ipa
