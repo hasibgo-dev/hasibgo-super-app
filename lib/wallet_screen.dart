@@ -8,21 +8,19 @@ class WalletScreen extends StatefulWidget {
 }
 
 class _WalletScreenState extends State<WalletScreen> {
-  // ইউজারের ওয়ালেট ব্যালেন্স
-  final double walletBalance = ১,২৫০০.৫০;
+  final double walletBalance = ১,৫০০.৫০;
 
-  // ট্রানজেকশন হিস্ট্রি বা লেনদেনের তালিকা
   final List> transactions = [
-    {"title": "রাইড শেয়ারিং পেমেন্ট", "amount": "-৩৫০ টাকা", "date": "আজ, ০২:৩০ PM", "type": "debit"},
-    {"title": "ওয়ালেট রিচার্জ (বিকাশ)", "amount": "+১,০০০ টাকা", "date": "গতকাল, ১১:১৫ AM", "type": "credit"},
-    {"title": "ফুড অর্ডার ক্যাশব্যাক", "amount": "+৫০ টাকা", "date": "৩ দিন আগে", "type": "credit"},
+    {"title": "টাকা ডিপোজিট (বিকাশ)", "amount": "+৫০০ টাকা", "date": "গতকাল, ৩:১৫ PM", "type": "credit"},
+    {"title": "পেমেন্ট পাঠিয়েছি (রিচার্জ)", "amount": "-১,০০০ টাকা", "date": "আজ, ১১:১০ AM", "type": "debit"},
+    {"title": "বুক অর্ডার ক্যাশব্যাক", "amount": "+৫০ টাকা", "date": "৩ দিন আগে", "type": "credit"},
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("HasibGo - ওয়ালেট ও পেমেন্ট"),
+        title: const Text('HasibGo - ওয়ালেট ও পেমেন্ট'),
         backgroundColor: Colors.green,
       ),
       body: Padding(
@@ -30,7 +28,6 @@ class _WalletScreenState extends State<WalletScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // ওয়ালেট ব্যালেন্স কার্ড
             Card(
               elevation: 4,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -41,13 +38,13 @@ class _WalletScreenState extends State<WalletScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
-                      "বর্তমান ওয়ালেট ব্যালেন্স",
+                      'বর্তমান ওয়ালেট ব্যালেন্স',
                       style: TextStyle(color: Colors.white70, fontSize: 14),
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "৳ $walletBalance",
-                      style: const TextStyle(color: Colors.white, fontSize: 26, fontWeight: FontWeight.bold),
+                      '৳ $walletBalance',
+                      style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 20),
                     Row(
@@ -59,10 +56,10 @@ class _WalletScreenState extends State<WalletScreen> {
                             foregroundColor: Colors.green.shade800,
                           ),
                           icon: const Icon(Icons.add),
-                          label: const Text("টাকা অ্যাড করুন"),
+                          label: const Text('টাকা অ্যাড করুন'),
                           onPressed: () {
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("রিচার্জ গেটওয়ে ওপেন হচ্ছে...")),
+                              const SnackBar(content: Text('ডিপোজিট পেজে যাওয়া হচ্ছে...')),
                             );
                           },
                         ),
@@ -72,7 +69,7 @@ class _WalletScreenState extends State<WalletScreen> {
                             foregroundColor: Colors.white,
                           ),
                           icon: const Icon(Icons.send),
-                          label: const Text("সেন্ড মানি"),
+                          label: const Text('সেন্ড মানি'),
                           onPressed: () {},
                         ),
                       ],
@@ -82,14 +79,11 @@ class _WalletScreenState extends State<WalletScreen> {
               ),
             ),
             const SizedBox(height: 25),
-
             const Text(
-              "সাম্প্রতিক লেনদেনসমূহ",
+              'সাম্প্রতিক লেনদেনসমূহ',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green),
             ),
             const SizedBox(height: 10),
-
-            // ট্রানজেকশন লিস্ট
             Expanded(
               child: ListView.builder(
                 itemCount: transactions.length,
@@ -108,10 +102,10 @@ class _WalletScreenState extends State<WalletScreen> {
                           color: isCredit ? Colors.green : Colors.red,
                         ),
                       ),
-                      title: Text(tx['title']!, style: const TextStyle(fontWeight: FontWeight.bold)),
-                      subtitle: Text(tx['date']!, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                      title: Text(tx['title'].toString(), style: const TextStyle(fontWeight: FontWeight.bold)),
+                      subtitle: Text(tx['date'].toString(), style: const TextStyle(fontSize: 12, color: Colors.grey)),
                       trailing: Text(
-                        tx['amount']!,
+                        tx['amount'].toString(),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: isCredit ? Colors.green : Colors.red,
