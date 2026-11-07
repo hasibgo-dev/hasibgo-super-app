@@ -8,7 +8,7 @@ class WalletScreen extends StatefulWidget {
 }
 
 class _WalletScreenState extends State<WalletScreen> {
-  final double walletBalance = ১,৫০০.৫০;
+  final double walletBalance = 1500.50;
 
   final List> transactions = [
     {"title": "টাকা ডিপোজিট (বিকাশ)", "amount": "+৫০০ টাকা", "date": "গতকাল, ৩:১৫ PM", "type": "credit"},
