@@ -9,6 +9,7 @@ class WalletScreen extends StatelessWidget {
     const double balance = 1500.50;
 
     final List<Map<String, dynamic>> transactions = [
+  final List> notifications = [
       {
         'title': 'বিকাশ ডিপোজিট',
         'amount': '+৳ 500.00',
