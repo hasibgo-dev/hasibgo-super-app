@@ -11,12 +11,10 @@ class _WalletScreenState extends State<WalletScreen> {
   final double walletBalance = 1500.50;
 
     final List> transactions = [
-
-    {"title": "টাকা ডিপোজিট (বিকাশ)", "amount": "+৫০০ টাকা", "date": "গতকাল, ৩:১৫ PM", "type": "credit"},
-    {"title": "পেমেন্ট পাঠিয়েছি (রিচার্জ)", "amount": "-১,০০০ টাকা", "date": "আজ, ১১:১০ AM", "type": "debit"},
-    {"title": "বুক অর্ডার ক্যাশব্যাক", "amount": "+৫০ টাকা", "date": "৩ দিন আগে", "type": "credit"},
+    {"title": "টাকা ডিপোজিট (বিকাশ)", "amount": "+500 টাকা", "date": "গতকাল, 3:15 PM", "type": "credit"},
+    {"title": "পেমেন্ট পাঠিয়েছি (রিচার্জ)", "amount": "-1000 টাকা", "date": "আজ, 11:10 AM", "type": "debit"},
+    {"title": "বুক অর্ডার ক্যাশব্যাক", "amount": "+50 টাকা", "date": " 3 দিন আগে", "type": "credit"},
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
