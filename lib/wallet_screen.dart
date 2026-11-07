@@ -1,27 +1,6 @@
 
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const HasibGoApp());
-}
-
-class HasibGoApp extends StatelessWidget {
-  const HasibGoApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'HasibGo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.green,
-        useMaterial3: true,
-      ),
-      home: const WalletScreen(),
-    );
-  }
-}
-
 class WalletScreen extends StatelessWidget {
   const WalletScreen({super.key});
 
@@ -29,7 +8,7 @@ class WalletScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     const double balance = 1500.50;
 
-    final transactions = [
+    final List<Map<String, dynamic>> transactions = [
       {
         'title': 'বিকাশ ডিপোজিট',
         'amount': '+৳ 500.00',
@@ -53,14 +32,9 @@ class WalletScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F8F5),
       appBar: AppBar(
-        title: const Text(
-          'HasibGo Wallet',
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
-        backgroundColor: Colors.green.shade700,
+        title: const Text('HasibGo Wallet'),
+        backgroundColor: Colors.green,
+        foregroundColor: Colors.white,
         centerTitle: true,
       ),
       body: SafeArea(
@@ -73,12 +47,7 @@ class WalletScreen extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: [
-                      Colors.green.shade800,
-                      Colors.green.shade500,
-                    ],
-                  ),
+                  color: Colors.green.shade700,
                   borderRadius: BorderRadius.circular(20),
                 ),
                 child: Column(
@@ -106,7 +75,8 @@ class WalletScreen extends StatelessWidget {
                         Expanded(
                           child: ElevatedButton.icon(
                             onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(
                                 const SnackBar(
                                   content: Text(
                                     'Add Money Demo',
@@ -122,7 +92,8 @@ class WalletScreen extends StatelessWidget {
                         Expanded(
                           child: OutlinedButton.icon(
                             onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(
                                 const SnackBar(
                                   content: Text(
                                     'Send Money Demo',
