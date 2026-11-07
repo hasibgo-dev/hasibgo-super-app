@@ -1,123 +1,201 @@
+
 import 'package:flutter/material.dart';
 
-class WalletScreen extends StatefulWidget {
-  const WalletScreen({super.key});
-
-  @override
-  State<WalletScreen> createState() => _WalletScreenState();
+void main() {
+  runApp(const HasibGoApp());
 }
 
-class _WalletScreenState extends State<WalletScreen> {
-  final double walletBalance = 1500.50;
-
-  final List> transactions = [
-    {"title": "টাকা ডিপোজিট (বিকাশ)", "amount": "+৫০০ টাকা", "date": "গতকাল, ৩:১৫ PM", "type": "credit"},
-    {"title": "পেমেন্ট পাঠিয়েছি (রিচার্জ)", "amount": "-১,০০০ টাকা", "date": "আজ, ১১:১০ AM", "type": "debit"},
-    {"title": "বুক অর্ডার ক্যাশব্যাক", "amount": "+৫০ টাকা", "date": "৩ দিন আগে", "type": "credit"},
-  ];
+class HasibGoApp extends StatelessWidget {
+  const HasibGoApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('HasibGo - ওয়ালেট ও পেমেন্ট'),
-        backgroundColor: Colors.green,
+    return MaterialApp(
+      title: 'HasibGo',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+        useMaterial3: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-              color: Colors.green.shade700,
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
+      home: const WalletScreen(),
+    );
+  }
+}
+
+class WalletScreen extends StatelessWidget {
+  const WalletScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    const double balance = 1500.50;
+
+    final transactions = [
+      {
+        'title': 'বিকাশ ডিপোজিট',
+        'amount': '+৳ 500.00',
+        'date': 'গতকাল, 3:15 PM',
+        'credit': true,
+      },
+      {
+        'title': 'মোবাইল রিচার্জ',
+        'amount': '-৳ 1,000.00',
+        'date': 'আজ, 11:10 AM',
+        'credit': false,
+      },
+      {
+        'title': 'ক্যাশব্যাক',
+        'amount': '+৳ 50.00',
+        'date': '৩ দিন আগে',
+        'credit': true,
+      },
+    ];
+
+    return Scaffold(
+      backgroundColor: const Color(0xFFF5F8F5),
+      appBar: AppBar(
+        title: const Text(
+          'HasibGo Wallet',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.green.shade700,
+        centerTitle: true,
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                width: double.infinity,
+                padding: const EdgeInsets.all(24),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.green.shade800,
+                      Colors.green.shade500,
+                    ],
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text(
                       'বর্তমান ওয়ালেট ব্যালেন্স',
-                      style: TextStyle(color: Colors.white70, fontSize: 14),
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontSize: 15,
+                      ),
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 12),
                     Text(
-                      '৳ $walletBalance',
-                      style: const TextStyle(color: Colors.white, fontSize: 28, fontWeight: FontWeight.bold),
+                      '৳ ${balance.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 24),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.green.shade800,
+                        Expanded(
+                          child: ElevatedButton.icon(
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'Add Money Demo',
+                                  ),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.add),
+                            label: const Text('Add Money'),
                           ),
-                          icon: const Icon(Icons.add),
-                          label: const Text('টাকা অ্যাড করুন'),
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('ডিপোজিট পেজে যাওয়া হচ্ছে...')),
-                            );
-                          },
                         ),
-                        OutlinedButton.icon(
-                          style: OutlinedButton.styleFrom(
-                            side: const BorderSide(color: Colors.white),
-                            foregroundColor: Colors.white,
+                        const SizedBox(width: 10),
+                        Expanded(
+                          child: OutlinedButton.icon(
+                            onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'Send Money Demo',
+                                  ),
+                                ),
+                              );
+                            },
+                            icon: const Icon(Icons.send),
+                            label: const Text('Send Money'),
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: Colors.white,
+                              side: const BorderSide(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                          icon: const Icon(Icons.send),
-                          label: const Text('সেন্ড মানি'),
-                          onPressed: () {},
                         ),
                       ],
                     ),
                   ],
                 ),
               ),
-            ),
-            const SizedBox(height: 25),
-            const Text(
-              'সাম্প্রতিক লেনদেনসমূহ',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.green),
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: transactions.length,
-                itemBuilder: (context, index) {
-                  final tx = transactions[index];
-                  bool isCredit = tx['type'] == 'credit';
-                  return Card(
-                    elevation: 1,
-                    margin: const EdgeInsets.only(bottom: 10),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundColor: isCredit ? Colors.green.shade50 : Colors.red.shade50,
-                        child: Icon(
-                          isCredit ? Icons.arrow_downward : Icons.arrow_upward,
-                          color: isCredit ? Colors.green : Colors.red,
-                        ),
-                      ),
-                      title: Text(tx['title'].toString(), style: const TextStyle(fontWeight: FontWeight.bold)),
-                      subtitle: Text(tx['date'].toString(), style: const TextStyle(fontSize: 12, color: Colors.grey)),
-                      trailing: Text(
-                        tx['amount'].toString(),
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: isCredit ? Colors.green : Colors.red,
-                          fontSize: 14,
-                        ),
-                      ),
-                    ),
-                  );
-                },
+              const SizedBox(height: 25),
+              const Text(
+                'সাম্প্রতিক লেনদেন',
+                style: TextStyle(
+                  fontSize: 19,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.green,
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 12),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: transactions.length,
+                  itemBuilder: (context, index) {
+                    final tx = transactions[index];
+                    final bool isCredit = tx['credit'] as bool;
+
+                    return Card(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      child: ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: isCredit
+                              ? Colors.green.shade50
+                              : Colors.red.shade50,
+                          child: Icon(
+                            isCredit
+                                ? Icons.arrow_downward
+                                : Icons.arrow_upward,
+                            color: isCredit
+                                ? Colors.green
+                                : Colors.red,
+                          ),
+                        ),
+                        title: Text(tx['title'] as String),
+                        subtitle: Text(tx['date'] as String),
+                        trailing: Text(
+                          tx['amount'] as String,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: isCredit
+                                ? Colors.green
+                                : Colors.red,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
